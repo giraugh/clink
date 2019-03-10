@@ -1365,7 +1365,7 @@ function upd_gr_bb(e)
     e.x,
     e.y,
     a,
-    1.3
+    1.4
    )
   end
   
@@ -1379,27 +1379,27 @@ function upd_gr_bb(e)
  end
  
  if e.st == 1 then
-  e.tim += .3
+  e.tim += .25
   e.vx = 0
   e.vy = 0
   if e.tim >= e.tim_max then
    e.tim = 0
    e.st = 0
-   local ii = flr(rnd(9)) + 1
-   for i = 1, 10 do
+   local ii = flr(rnd(7)) + 1
+   for i = 1, 8 do
     if i != ii then
-    	local a = i / 10
+    	local a = i / 8
      shoot_bullet(
       e.x + 2,
       e.y + 4,
       a,
-      1.7,
+      1.1,
       true
      )
     end
    end
-   if e.health < e.health_max/2 then
-    if rnd(1) < .4 then
+   if e.health < e.health_max/3 then
+    if rnd(1) < .1 then
      e.st = 1
      e.tim = 0
     end
@@ -1410,7 +1410,7 @@ function upd_gr_bb(e)
  e.vx += cos(e.dr) * .2
  e.vy += sin(e.dr) * .2
 
- upd_bb(e, not e.st == 1, true)
+ upd_bb(e, true, true)
 end
 
 function upd_bullet(e)
@@ -1847,6 +1847,9 @@ function draw_ui()
   print("❎", 1, 65, 6)
   pal(6,6)
  end
+ 
+ -- version
+ print("v0.4b", 108, 65, 5) 
 end
 
 function draw_bomb(e, x, y)
@@ -2047,8 +2050,13 @@ end
 
 function draw_gr_big_bad(e,x,y)
  if e.invinc > 0 and (e.invinc/2) % 2 == 0 then
-  pal(8, 7)
-  pal(9, 7)
+  if e.st == 1 and flr(time()*100)%2 == 0 then
+   pal(9, 12)
+   pal(8, 1)
+  else
+   pal(8, 7)
+   pal(9, 7)
+  end
  else
   if e.st == 1 and flr(time()*100)%2 == 0 then
    pal(9, 12)
