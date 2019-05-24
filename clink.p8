@@ -8,7 +8,7 @@ r_text_tim = 0
 
 psx, psy = 0, 0
 
-version = "v0.8a"
+version = "v0.8b"
 
 power_test_red,power_test_blu,power_test_com = false,false,false
 
@@ -67,6 +67,12 @@ function _init()
 end
 
 function _update()
+ if (corrupt_mode) then
+  for i=1,5 do
+   poke(rnd(0x8000),rnd(0x100))
+  end
+ end
+
  local p = entities[1]
 
  if gs == 5 then
@@ -356,7 +362,7 @@ function draw_text()
  -- shop 2
  if rx == 3 and ry == 0 then
   if mget(55,3) != 1 then
-   print(typed("$99", rtt, 10), (5 * 8) - 2, 2 * 8 + 2, 9)
+   print(typed("$99", r_text_tim, 10), (5 * 8) - 2, 2 * 8 + 2, 9)
   end
  end
  
@@ -364,7 +370,7 @@ function draw_text()
  if rx == 3 and ry == 1 then
   if not p.pickups[p_bombs] then
    print(
-    typed("you dare approach me?", rtt - 5, 20),
+    typed("you dare approach me?", r_text_tim - 5, 20),
     28,
     50,
     9
@@ -376,7 +382,7 @@ function draw_text()
  if rx == 1 and ry == 6 then
   if not p.pickups[p_raft] then
    print(
-    typed("you dare approach me?", rtt - 5, 20),
+    typed("you dare approach me?", r_text_tim - 5, 20),
     26,
     42,
     4
@@ -387,7 +393,7 @@ function draw_text()
  -- dungeon puzzle hint
  if rx == 4 and ry == 2 then
   print(
-   typed("read between the lines", rtt - 5, 20),
+   typed("read between the lines", r_text_tim - 5, 20),
    1 * 8 - 4,
    6 * 8 - 4,
    12
@@ -401,7 +407,7 @@ function draw_text()
    s = "proceed."
   end
   print(
-   typed(s, rtt - 5, 20),
+   typed(s, r_text_tim - 5, 20),
     3 * 8,
     3 * 8 - 4,
     4
@@ -411,7 +417,7 @@ function draw_text()
  -- final boss
  if rx == 5 and ry == 0 then
   print(
-   typed("you win!", rtt - 5, 20),
+   typed("you win!", r_text_tim - 5, 20),
     4 * 8 - 4,
     5 * 8 - 4,
     2
