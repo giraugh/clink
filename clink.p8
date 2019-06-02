@@ -8,7 +8,7 @@ r_text_tim = 0
 
 psx, psy = 0, 0
 
-version = "v0.8b"
+version = "v0.8c"
 
 power_test_red,power_test_blu,power_test_com = false,false,false
 
@@ -1746,7 +1746,7 @@ end
 function upd_heart(h)
  local p = entities[1]
  if coll_with_pl(h) then
-  if p.health < p.max_health then
+  if p.health < p.health_max then
    h.collected = true
    p.health += 2
    p.health = min(p.health, p.health_max)
