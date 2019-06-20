@@ -8,7 +8,7 @@ r_text_tim = 0
 
 psx, psy = 0, 0
 
-version = "v0.8c"
+version = "v0.8d"
 
 power_test_red,power_test_blu,power_test_com = false,false,false
 
@@ -276,7 +276,7 @@ function make_vortex(x, y)
    x + cos(a) * r,
    y + sin(a) * r,
    3,
-   pget(xx-ox, yy-oy),
+   pget(x-ox, y-oy),
    cos(a),
    sin(a)
   )
